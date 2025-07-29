@@ -26,31 +26,24 @@ async def attendre_n_fois(nombre: int, delai_max: int) -> List[float]:
     # Création des coroutines à exécuter.
     # On crée une liste de coroutines wait_random avec delai_max.
     # Ces coroutines ne sont pas encore lancées, juste prêtes.
-
     listCoroutine = [wait_random(delai_max) for _ in range(nombre)]
 
     # Création des tâches asyncio à partir des coroutines.
     # asyncio.create_task planifie chaque coroutine pour exécution.
     # Cela permet de lancer toutes les tâches en même temps.
-
-    taches = [asyncio.create_task(coro) for coro in listCoroutine]
+    tache = [asyncio.create_task(coro) for coro in listCoroutine]
 
     # Liste pour stocker les délais dans l’ordre d’achèvement.
     # On crée une liste vide qui recevra les résultats au fur et à mesure.
-
     delais_trier = []
 
     # Récupération des tâches dans l’ordre de leur fin.
     # asyncio.as_completed retourne les tâches terminées dans l’ordre.
     # On attend chaque tâche finie et on ajoute son délai à la liste.
-
-    for tache_fin in asyncio.as_completed(taches):
+    for tache_fin in asyncio.as_completed(tache):
         delai = await tache_fin
         delais_trier.append(delai)
 
     # Retourne la liste des délais dans l’ordre d’arrivée.
     # Pas besoin de trier car l’ordre correspond à celui d’achèvement.
-
     return delais_trier
-
-
