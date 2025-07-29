@@ -6,9 +6,10 @@ secondes et le renvoie finalement.
 """
 import asyncio
 import random
+import typing
 
 
-async def wait_random(max_delay=10):
+async def wait_random(max_delay: int = 10) -> float:
     """coroutine asynchrone """
     value = random.uniform(0, max_delay)
     await asyncio.sleep(value)
