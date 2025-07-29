@@ -9,7 +9,7 @@ from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, delai_max: int) -> List[float]:
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """
     Exécute la coroutine wait_random un nombre donné de fois avec un délai
     maximal spécifié, puis retourne la liste des délais obtenus, triée
@@ -24,7 +24,7 @@ async def wait_n(n: int, delai_max: int) -> List[float]:
         List[float] : liste des délais dans l’ordre d’achèvement
     """
     # Crée une liste de coroutines prêtes à être lancées
-    listCoroutine = [wait_random(delai_max) for _ in range(n)]
+    listCoroutine = [wait_random(max_delay) for _ in range(n)]
 
     # Planifie l’exécution concurrente avec asyncio.create_task
     tache_repet = [asyncio.create_task(coro) for coro in listCoroutine]
