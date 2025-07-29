@@ -1,62 +1,57 @@
 #!/usr/bin/env python3
-""" Lance une coroutine"""
-import asyncio, random
+"""Lance plusieurs fois une coroutine wait_random et récupère les délais
+dans l’ordre d’arrivée
+"""
+
+import asyncio
 from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> List[float]:
+async def attendre_n_fois(nombre: int, delai_max: int) -> List[float]:
     """
-    Lance n fois la coroutine wait_random avec un délai maximal donné et
-    retourne une liste des délais obtenus, ordonnée dans l'ordre d'arrivée
-    (croissant), sans utiliser la fonction sort().
+    Exécute la coroutine wait_random un nombre donné de fois avec un délai
+    maximal spécifié,     puis retourne la liste des délais obtenus,
+    ordonnée dans l’ordre d’achèvement.
 
     Args:
-        n (int): Le nombre de fois à exécuter wait_random.
-        max_delay (int): Le délai maximal (en secondes) pour chaque attente.
+        nombre (int) : Nombre d’exécutions de la coroutine wait_random.
+        delai_max (int) : Délai maximal (en secondes) à passer en paramètre
+        à wait_random.
 
     Returns:
-        List[float]: Liste des délais flottants dans l'ordre d'achèvement.
+        List[float] : Liste des délais (float) dans l’ordre où les coroutines
+        se terminent.
     """
-    tasks = [wait_random(max_delay) for _ in range(n)]
-    results = []
-    for task in asyncio.as_completed(tasks):
-        delay = await task
-        results.append(delay)
-    return results
+    # Création des coroutines à exécuter
+    # Ici, on génère une liste de coroutines en appelant la fonction wait_random
+    # avec le paramètre delai_max, répété 'nombre' fois.
+    # Ces coroutines ne sont pas encore lancées, ce sont des objets prêts à être exécutés.
+    coroutines = [wait_random(delai_max) for _ in range(nombre)]
 
+    # Création des tâches asyncio à partir des coroutines pour planification immédiate
+    # La fonction asyncio.create_task transforme chaque coroutine en tâche planifiée
+    # qui sera prise en charge par la boucle d'événements dès son démarrage.
+    # Cela permet à toutes les coroutines d'être lancées "concurremment".
+    taches = [asyncio.create_task(coro) for coro in coroutines]
 
+    # Liste qui va stocker les délais dans l’ordre d’achèvement des tâches
+    # On initialise une liste vide qui contiendra les résultats (les délais)
+    # dans l'ordre dans lequel les tâches se terminent, ce qui reflète
+    # la chronologie réelle de chaque coroutine.
+    delais_ordonnes = []
 
+    # Récupération des tâches dans l’ordre où elles se terminent
+    # asyncio.as_completed(taches) retourne un itérable de tâches qui seront
+    # itérées dans l’ordre où elles finissent, pas dans l’ordre de lancement.
+    # Pour chaque tâche terminée, on fait un await pour récupérer son résultat,
+    # puis on l'ajoute à la liste des délais ordonnés.
+    for tache_terminee in asyncio.as_completed(taches):
+        delai = await tache_terminee
+        delais_ordonnes.append(delai)
 
-"""
-Importez wait_random depuis le fichier Python précédent que vous avez écrit et
-écrivez une routine asynchrone appelée wait_n qui prend deux arguments de type
-entier (dans cet ordre) : n et max_delay. Vous lancerez wait_random n fois avec
-le max_delay spécifié.
+    # Retourne la liste des délais triés naturellement par ordre d'arrivée
+    # sans utiliser la fonction sort(), car l'ordre d'arrivée correspond
+    # à l'ordre croissant des délais.
+    return delais_ordonnes
 
-async def wait_n(n: int, max_delay: int) -> List[float]:
-
-    tasks = [wait_random(max_delay) for _ in range(n)]
-    results = []
-    for task in asyncio.as_completed(tasks):
-        delay = await task
-        results.append(delay)
-    return results
-
-    #!/usr/bin/env python3
-
-    tasks = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
-    results = []
-    for task in asyncio.as_completed(tasks):
-        delay = await task
-        results.append(delay)
-    return results
-
-
-
-
-
-wait_n doit renvoyer la liste de tous les délais (valeurs flottantes).
-La liste des délais doit être classée par ordre croissant sans utiliser sort()
-en raison de la concurrence.
-"""
