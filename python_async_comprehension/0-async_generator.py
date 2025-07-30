@@ -11,6 +11,15 @@ from typing import AsyncGenerator
 
 
 async def async_generator() -> AsyncGenerator[float, None]:
+    """
+    Génère 10 nombres flottants entre 0 et 10 avec une pause d'1 seconde.
+
+    À chaque itération, attend 1 seconde puis produit un nombre réel
+    compris entre 0 (inclus) et 10 (exclus).
+
+    Retourne :
+        AsyncGenerator[float, None] : générateur asynchrone de nombres.
+    """
     for _ in range(10):
-        await asyncio.sleep(1)
-        yield random.uniform(0, 10)
+        await asyncio.sleep(1)          # Pause asynchrone de 1 seconde
+        yield random.uniform(0, 10)     # Génère un float entre 0 et 10
