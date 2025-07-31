@@ -7,10 +7,10 @@ le module random.
 """
 import asyncio
 import random
-from typing import AsyncGenerator
+from typing import Generator
 
 
-async def async_generator() -> AsyncGenerator[float, None]:
+async def async_generator() -> Generator[float, None, None]:
     """
     Génère 10 nombres flottants entre 0 et 10 avec une pause d'1 seconde.
 
@@ -18,7 +18,7 @@ async def async_generator() -> AsyncGenerator[float, None]:
     compris entre 0 (inclus) et 10 (exclus).
 
     Retourne :
-        AsyncGenerator[float, None] : générateur asynchrone de nombres.
+        Generator[float, None, None] : générateur de nombres.
     """
     for _ in range(10):
         await asyncio.sleep(1)          # Pause asynchrone de 1 seconde
