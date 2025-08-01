@@ -23,3 +23,4 @@ async def async_generator() -> Generator[float, None, None]:
     for _ in range(10):
         await asyncio.sleep(1)          # Pause asynchrone de 1 seconde
         yield random.uniform(0, 10)     # Génère un float entre 0 et 10
+    
