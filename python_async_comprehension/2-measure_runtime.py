@@ -27,12 +27,12 @@ async def measure_runtime() -> float:
     Returns:
         float: Durée d'exécution totale en secondes.
     """
-    tpsavant = time.time()
+    tpsavant = time.perf_counter()
     await asyncio.gather(
         async_comprehension(),
         async_comprehension(),
         async_comprehension(),
         async_comprehension(),
         )
-    tpsapres = time.time()
+    tpsapres = time.perf_counter()
     return (tpsapres - tpsavant)
