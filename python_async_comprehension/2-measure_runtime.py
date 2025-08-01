@@ -10,10 +10,23 @@ expliquez-vous pourquoi.
 """
 import asyncio
 import time
+import typing
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime():
+async def measure_runtime() -> float:
+    """
+    Mesurer le temps d'exécution de l'exécution concurrente de plusieurs
+    coroutines.
+
+    Cette fonction exécute quatre fois la coroutine `async_comprehension` de
+    manière concurrente
+    en utilisant `asyncio.gather`, puis mesure et renvoie le temps total
+    d'exécution.
+
+    Returns:
+        float: Durée d'exécution totale en secondes.
+    """
     tpsavant = time.time()
     await asyncio.gather(
         async_comprehension(),
