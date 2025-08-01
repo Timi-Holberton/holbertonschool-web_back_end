@@ -11,8 +11,14 @@ async_generator = __import__('0-async_generator').async_generator
 
 
 async def async_comprehension() -> List[float]:
-    """  """
-    coroutine = [] # Liste vide
+    """
+    Collecte 10 nombres à virgule flottante aléatoires à l'aide d'une
+    compréhension asynchrone sur le générateur asynchrone.
+
+    Return : Liste[float] : une liste contenant 10 nombres à virgule flottante
+    aléatoires.
+    """
+    coroutine = []                          # Liste vide
     async for value in async_generator():   # boucle sur async_generator
         coroutine.append(value)             # ajoute calue à coroutine
         if len(coroutine) == 10:            # vérifie qu'il y en ai 10
