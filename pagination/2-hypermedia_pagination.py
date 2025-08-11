@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """ Pagination """
 from typing import Tuple
