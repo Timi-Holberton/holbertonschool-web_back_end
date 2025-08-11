@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ Pagination """
-from typing import List
+from typing import Tuple
 
 
-def index_range(page: int, page_size: int) -> List[int]:
+def index_range(page: int, page_size: int) -> Tuple:
     """
     La fonction doit retourner un tuple de deux éléments contenant un indice
     de début et un indice de fin correspondant à la plage d’index à retourner
