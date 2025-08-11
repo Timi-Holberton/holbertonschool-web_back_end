@@ -49,9 +49,9 @@ class Server:
 
         Fonctions principales :
         - get_page(page, page_size) : Retourner une page spécifique de données.
-        - get_hyper_index(index, page_size) : Retourner un dictionnaire contenant
-        les données de la page correspondant à l'index donné, ainsi que
-        l'index de la page suivante si disponible.
+        - get_hyper_index(index, page_size) : Retourner un dictionnaire
+        contenant les données de la page correspondant à l'index donné,
+        ainsi que l'index de la page suivante si disponible.
 
         Types :
         - Les pages sont renvoyées sous forme de listes d’éléments.
