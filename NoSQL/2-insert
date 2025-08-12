@@ -1,5 +1,4 @@
 // Écrivez un script qui insère un document dans la collection school
 // Le document doit avoir un attribut name avec la valeur « Holberton school ».
 // Le nom de la base de données sera transmis en tant qu'option de la commande mongo.
-use my_db
-db.school.insertOne({Name : "Holberton school"})
+db.school.insert({ name: "Holberton school" });
