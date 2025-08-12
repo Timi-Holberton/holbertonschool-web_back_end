@@ -1,4 +1,4 @@
 // Écrivez un script qui ajoute un nouvel attribut à un document dans la collection school
 // Le script ne doit mettre à jour que les documents dont le nom est « Holberton school » (tous).
 // La mise à jour doit ajouter l'attribut address avec la valeur « 972 Mission street ».
-db.school.update({name:"Holberton school"}, {$set:{address:"972 Mission street"}})
+db.school.update({name:"Holberton school"}, {$set:{address:"972 Mission street"}}, {multi:true})
