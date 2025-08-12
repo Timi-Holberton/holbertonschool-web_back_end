@@ -1,0 +1,2 @@
+// Écrivez un script qui supprime tous les documents dont le nom est « Holberton school » dans la collection school.
+res=school.delete_many({"name":"Holberton school"})
