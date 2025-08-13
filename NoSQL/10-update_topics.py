@@ -12,8 +12,7 @@ dans l'école
 
 
 def update_topics(mongo_collection, name, topics):
-    """
-    """
+    """ essai """
     mongo_collection.update(
         {"name": name},
         {"$set": {"topics": topics}}
