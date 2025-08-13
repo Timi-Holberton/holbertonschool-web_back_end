@@ -12,8 +12,20 @@ dans l'école
 
 
 def update_topics(mongo_collection, name, topics):
-    """ essai """
-    mongo_collection.update(
+    """
+    Met à jour le champ 'topics' de tous les documents dans la collection
+    MongoDB correspondant au nom spécifié.
+
+    Args:
+        mongo_collection (pymongo.collection.Collection): Collection MongoDB.
+        name (str): Nom de l'école à mettre à jour.
+        topics (list of str): Liste des thèmes à assigner au champ 'topics'.
+
+    Returns:
+        pymongo.results.UpdateResult: Objet contenant le résultat de la MAJ,
+        incluant le nombre de documents modifiés.
+    """
+    return mongo_collection.update_many(
         {"name": name},
         {"$set": {"topics": topics}}
     )
