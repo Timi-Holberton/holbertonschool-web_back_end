@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
 """
 Écrivez une fonction Python qui répertorie tous les documents
 d'une collection.
 """
-
 
 def list_all(mongo_collection):
     """ Liste tous les doc """
