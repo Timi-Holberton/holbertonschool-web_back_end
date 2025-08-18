@@ -23,4 +23,4 @@ export default function getNeighborhoodsList() {
 // le "this" reste celui du parent.
 
 // on supprime "function add" et on ajoute "=>", elle devient une
-// fonction anonyme.
+// fonction anonyme
