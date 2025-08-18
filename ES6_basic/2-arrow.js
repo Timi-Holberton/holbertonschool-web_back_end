@@ -24,3 +24,4 @@ export default function getNeighborhoodsList() {
 
 // on supprime "function add" et on ajoute "=>", elle devient une
 // fonction anonyme
+
