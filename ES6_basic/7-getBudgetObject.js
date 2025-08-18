@@ -2,18 +2,6 @@
 // Modifiez l'objet budget de la fonction suivante afin d'utiliser
 // simplement la syntaxe abrégée de la propriété de l'objet à la place.
 export default function getBudgetObject(income, gdp, capita) {
-  let budget = {income, gdp, capita};
+  const budget = { income, gdp, capita };
   return budget;
 }
-
-/*
-export default function getBudgetObject(income, gdp, capita) {
-  const budget = {
-    income: income,
-    gdp: gdp,
-    capita: capita,
-  };
-
-  return budget;
-}
-*/
