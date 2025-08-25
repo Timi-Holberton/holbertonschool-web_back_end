@@ -5,6 +5,7 @@
 // Vous devez utiliser la fonction reduce sur le tableau.
 
 export default function getStudentIdsSum(listStudent) {
+  // On utilise reduce pour additionner tous les id des étudiants
   let sum = listStudent.reduce((total, student) => total + student.id, 0);
   return sum;
 }
