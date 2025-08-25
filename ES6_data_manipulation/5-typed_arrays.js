@@ -1,21 +1,26 @@
-// Créez une fonction nommée createInt8TypedArray qui renvoie un nouveau
-// ArrayBuffer avec une valeur Int8 à une position spécifique.
-// Elle doit accepter trois arguments : length (Nombre), position (Nombre)
-// et value (Nombre).
-// Si l'ajout de la valeur n'est pas possible, l'erreur Position outside range
-// doit être générée.
-
+// Crée et exporte par défaut la fonction createInt8TypedArray
+// Cette fonction crée un ArrayBuffer de longueur spécifiée et place une valeur Int8 à une position donnée
 export default function createInt8TypedArray(length, position, value) {
+
+  // Crée un ArrayBuffer de 'length' octets
   let buffer = new ArrayBuffer(length);
+
+  // Crée un Int8Array qui permet de manipuler le buffer comme un tableau d'entiers 8 bits
   let int8 = new Int8Array(buffer);
 
-  // Vérifie si la position est valide
+  // Vérifie si la position est valide (0 <= position < length)
   if (position >= 0 && position < length) {
-    int8[position] = value; // Si valide, écrit la valeur
+
+    // Si la position est valide, écrit la valeur à cet indice
+    int8[position] = value;
+
   } else {
-    throw new Error("Position outside range"); // Sinon lance l'erreur
+
+    // Si la position est invalide, lance une erreur
+    throw new Error("Position outside range");
   }
 
-  // Retourne le buffer avec la valeur ajoutée
+  // Retourne le buffer final contenant la valeur
   return buffer;
 }
+
