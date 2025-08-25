@@ -5,14 +5,14 @@ export default function createInt8TypedArray(length, position, value) {
   // Crée un ArrayBuffer de 'length' octets
   let buffer = new ArrayBuffer(length);
 
-  // Crée un Int8Array qui permet de manipuler le buffer comme un tableau d'entiers 8 bits
-  let int8 = new Int8Array(buffer);
+  // Crée un DataView pour manipuler le buffer avec des entiers
+  let view = new DataView(buffer);
 
   // Vérifie si la position est valide (0 <= position < length)
   if (position >= 0 && position < length) {
 
-    // Si la position est valide, écrit la valeur à cet indice
-    int8[position] = value;
+    // Si la position est valide, écrit la valeur Int8 à cet indice
+    view.setInt8(position, value);
 
   } else {
 
@@ -20,7 +20,6 @@ export default function createInt8TypedArray(length, position, value) {
     throw new Error("Position outside range");
   }
 
-  // Retourne le buffer final contenant la valeur
-  return buffer;
+  // Retourne le DataView final contenant la valeur
+  return view;
 }
-
