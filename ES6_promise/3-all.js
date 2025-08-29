@@ -1,5 +1,4 @@
-import uploadPhoto from "./utils";
-import createUser from "./utils";
+import { uploadPhoto, createUser } from './utils';
 
 export default function handleProfileSignup() {
   // On lance les deux fonctions en parallèle
@@ -10,7 +9,7 @@ export default function handleProfileSignup() {
   Promise.all([photoPromise, userPromise])
     .then(([photo, user]) => {
       // Une fois toutes résolues, on affiche photo, prénom et nom
-      console.log(`${photo} ${user.firstName} ${user.lastName}`);
+      console.log(`${photo.body} ${user.firstName} ${user.lastName}`);
     })
     .catch(() => {
       // Si une promesse échoue, on affiche le message d'erreur
