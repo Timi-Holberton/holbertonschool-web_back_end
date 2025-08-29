@@ -1,5 +1,5 @@
-import signUpUser from './4-user-promise.js';
-import uploadPhoto from './5-photo-reject.js';
+import signUpUser from './4-user-promise';
+import uploadPhoto from './5-photo-reject';
 
 export default function handleProfileSignup(firstName, lastName, fileName) {
   // On utilise Promise.allSettled pour exécuter les 2 promesses en parallèle
@@ -11,7 +11,7 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
   ])
     // Une fois que les 2 promesses sont terminées (réussies ou rejetées),
     // on traite les résultats dans un tableau.
-    .then((resultat) => results.map((resultat) => {
+    .then((resultat) => resultat.map((resultat) => {
       // Si la promesse est résolue correctement
       if (resultat.status === 'fulfilled') {
         return { status: 'fulfilled', value: resultat.value };
