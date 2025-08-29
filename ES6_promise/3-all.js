@@ -6,7 +6,7 @@ export default function handleProfileSignup() {
   const userPromise = createUser();
 
   // On attend que toutes les promesses soient résolues
-  Promise.all([photoPromise, userPromise])
+  return Promise.all([photoPromise, userPromise])
     .then(([photo, user]) => {
       // Une fois toutes résolues, on affiche photo, prénom et nom
       console.log(`${photo.body} ${user.firstName} ${user.lastName}`);
