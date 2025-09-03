@@ -1,61 +1,43 @@
 const fs = require('fs'); // Import du module natif 'fs' pour lire les fichiers
 
-function countStudents(path) {
-  try {
-    // Lire le fichier de manière synchrone en UTF-8 (sinon retourne un Buffer)
-    const data = fs.readFileSync(path, 'utf-8');
+function countStudents(path) { // Fonction qui prend le chemin du fichier en paramètre
+  try { // Bloc try-catch pour gérer les erreurs de lecture/traitement
+    const data = fs.readFileSync(path, 'utf-8'); // Lire le fichier de manière synchrone en UTF-8
 
-    // Supprimer les espaces inutiles et découper le contenu en tableau de lignes
-    const lines = data.trim().split('\n');
+    const lines = data.trim().split('\n'); // Supprimer espaces et découper en tableau de lignes
 
-    // Retirer la première ligne (l’en-tête : firstname,lastname,age,field)
-    lines.shift();
+    lines.shift(); // Retirer la première ligne (en-tête : firstname,lastname,age,field)
 
-    // Objet pour stocker les étudiants par champ d’étude (ex: CS, SWE)
-    const champs = {};
+    const champs = {}; // Objet pour stocker les étudiants par champ d'étude
 
-    // Compteur du nombre total d’étudiants
-    let total = 0;
+    let total = 0; // Compteur du nombre total d'étudiants
 
-    // Parcours de chaque ligne du fichier
-    for (const line of lines) {
-      // Ignorer les lignes vides (par sécurité)
-      if (line.trim() !== '') {
+    for (const line of lines) { // Parcours de chaque ligne du fichier
+      if (line.trim() !== '') { // Ignorer les lignes vides
         total += 1; // Incrémenter le compteur total
 
-        // Découper la ligne CSV en colonnes
-        const decoupLigne = line.split(',');
+        const decoupLigne = line.split(','); // Découper la ligne CSV en colonnes
 
-        // Récupérer le prénom (première colonne)
-        const firstname = decoupLigne[0];
+        const firstname = decoupLigne[0]; // Récupérer le prénom (première colonne)
 
-        // Récupérer le champ d’étude (dernière colonne)
-        const champ = decoupLigne[decoupLigne.length - 1];
+        const champ = decoupLigne[decoupLigne.length - 1]; // Récupérer le champ d'étude (dernière colonne)
 
-        // Si ce champ n’existe pas encore dans l’objet, on l’initialise avec un tableau vide
-        if (!champs[champ]) {
-          champs[champ] = [];
+        if (!champs[champ]) { // Si ce champ n'existe pas encore dans l'objet
+          champs[champ] = []; // L'initialiser avec un tableau vide
         }
 
-        // Ajouter le prénom dans le tableau correspondant au champ
-        champs[champ].push(firstname);
+        champs[champ].push(firstname); // Ajouter le prénom dans le tableau du champ
       }
     }
 
-    // Afficher le nombre total d’étudiants
-    console.log(`Number of students: ${total}`);
+    console.log(`Number of students: ${total}`); // Afficher le nombre total d'étudiants
 
-    // Afficher le nombre d’étudiants et la liste des prénoms pour chaque champ
-    for (const [champ, students] of Object.entries(champs)) {
-      console.log(
-        `Number of students in ${champ}: ${students.length}. List: ${students.join(', ')}`,
-      );
+    for (const [champ, students] of Object.entries(champs)) { // Parcourir chaque champ d'étude
+      console.log(`Number of students in ${champ}: ${students.length}. List: ${students.join(', ')}`); // Afficher stats par champ
     }
-  } catch (err) {
-    // En cas d’erreur (fichier introuvable ou illisible), on lance une erreur
-    throw new Error('Cannot load the database');
+  } catch (err) { // En cas d'erreur de lecture ou de traitement
+    throw new Error('Cannot load the database'); // Lancer une erreur avec message spécifique
   }
 }
 
-module.exports = countStudents;
-// Export de la fonction pour qu’elle puisse être utilisée ailleurs
+module.exports = countStudents; // Export de la fonction pour utilisation externe
