@@ -1,9 +1,13 @@
 const express = require('express');
-const app = express();
-const port = 1245;
 
+const app = express();
+
+// Route pour /
 app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
 
-app.listen(port)
+// Écoute sur le port 1245
+app.listen(1245);
+
+module.exports = app;
