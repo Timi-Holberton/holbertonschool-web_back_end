@@ -4,7 +4,7 @@ function getDBPath() {
   return process.argv[2];
 }
 
-export default class StudentsController {
+class StudentsController {
   static async getAllStudents(req, res) {
     try {
       const map = await readDatabase(getDBPath());

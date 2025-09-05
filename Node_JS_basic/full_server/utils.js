@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 
-export default async function readDatabase(filePath) {
+async function readDatabase(filePath) {
   if (!filePath) throw new Error('Cannot load the database');
   try {
     const data = await fs.readFile(filePath, 'utf8');
