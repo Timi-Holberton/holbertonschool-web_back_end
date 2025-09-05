@@ -30,8 +30,8 @@ function countStudents(path) { // Fonction pour compter les étudiants dans un f
     });
   });
 }
-
-const app = http.createServer((req, res) => { // Créer le serveur HTTP avec callback pour chaque requête
+// Créer le serveur HTTP avec callback pour chaque requête
+const app = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' }); // Définir le statut 200 et type de contenu texte
 
   if (req.url === '/') { // Si route racine demandée
