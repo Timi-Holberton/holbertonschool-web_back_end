@@ -35,3 +35,4 @@ export default class StudentsController {
     }
   }
 }
+module.exports = StudentsController;

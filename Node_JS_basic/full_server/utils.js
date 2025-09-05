@@ -20,3 +20,4 @@ export default async function readDatabase(filePath) {
     throw new Error('Cannot load the database');
   }
 }
+module.exports = readDatabase;
